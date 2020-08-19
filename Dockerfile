@@ -10,8 +10,7 @@ RUN apt-get upgrade -y
 # ---------------	I N S T A L L S  -------------- #
 RUN apt-get install nginx -y
 RUN apt-get install -y wget
-RUN apt-get install -y php7.3-fpm php7.3-common php7.3-mysql php7.3-gmp php7.3-curl php7.3-intl php7.3-imap
-RUN apt-get install -y php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-xml php7.3-cli php7.3-zip php7.3-soap 
+RUN apt-get install -y php7.3 php-mysql php-fpm php-cli php-mbstring
 RUN apt-get install -y mariadb-server
 
 # ---------------	G N I N X  -------------- #
@@ -25,6 +24,11 @@ COPY srcs/nginx/localhost.conf /etc/nginx/sites-available/
 COPY srcs/nginx/nginx.conf /etc/nginx/
 
 RUN ln -s /etc/nginx/sites-available/localhost.conf /etc/nginx/sites-enabled/localhost.conf
+
+
+# -----------		P  H  P  	----------- #
+# WORKDIR	/etc/php/7.0/fpm/pool.d
+
 
 
 
