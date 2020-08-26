@@ -36,11 +36,12 @@ RUN 		cp -r wordpress/* . && rm -rf wordpress
 COPY		srcs/wp-config.php .
 
 # ---------------	M A R I A  -------------- #
-RUN service mysql start  && \
-echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password && \
-echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password && \
-echo "update mysql.user set plugin='mysql_native_password' where user='root';" | mysql -u root --skip-password && \
-echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password 
+COPY srcs/wordpress.sql .
+RUN service mysql start && \
+	echo "CREATE DATABASE wordpress; \
+	GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost';\
+	FLUSH PRIVILEGES;update mysql.user set plugin = 'mysql_native_password' where user='root';" | mysql -u root && \
+	mysql wordpress -u root --password=  < wordpress.sql && rm wordpress.sql
 
 
 
