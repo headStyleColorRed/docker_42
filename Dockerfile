@@ -2,7 +2,7 @@
 
 FROM 	debian:buster
 
-# UPDATE
+# U P D A T E
 RUN		apt-get update
 RUN		apt-get upgrade -y
 
@@ -52,7 +52,8 @@ RUN		tar xf phpMyAdmin-4.9.2-all-languages.tar.xz
 RUN		rm -f phpMyAdmin-4.9.2-all-languages.tar.xz
 RUN		mv phpMyAdmin-4.9.2-all-languages phpMyAdmin
 
-#SLL SETUP
+
+# ---------------	S S L   C E R T  -------------- #
 RUN mkdir ~/mkcert &&\
 	cd ~/mkcert &&\
 	wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64 &&\
@@ -60,10 +61,12 @@ RUN mkdir ~/mkcert &&\
   	chmod +x mkcert &&\
 	./mkcert -install && ./mkcert localhost
 
-# Open port 80 and 443
+
+# P O R T S
 EXPOSE 80 443
 
-# Execute when container starts
+
+# C O N T A I N E R    L A U N C H 
 CMD service nginx start && \
 	service mysql start && \
 	service php7.3-fpm start && \
