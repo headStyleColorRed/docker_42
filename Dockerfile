@@ -45,14 +45,15 @@ echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 
 
 # -----------	P H P 	M Y  A D M I N	----------- #
-RUN		wget https://files.phpmyadmin.net/phpMyAdmin/4.9.2/phpMyAdmin-4.9.2-all-languages.tar.xz
-
-RUN		tar xf phpMyAdmin-4.9.2-all-languages.tar.xz 
-RUN		rm -f phpMyAdmin-4.9.2-all-languages.tar.xz
-RUN		mv phpMyAdmin-4.9.2-all-languages phpMyAdmin
+RUN		wget https://files.phpmyadmin.net/phpMyAdmin/5.0.0-rc1/phpMyAdmin-5.0.0-rc1-all-languages.tar.gz
+RUN 	tar xf phpMyAdmin-5.0.0-rc1-all-languages.tar.gz && rm -rf phpMyAdmin-5.0.0-rc1-all-languages.tar.gz
+RUN 	mv phpMyAdmin-5.0.0-rc1-all-languages phpmyadmin
+COPY 	./srcs/config.inc.php phpmyadmin
 
 
 # ---------------	S S L   C E R T  -------------- #
+# https://github.com/FiloSottile/mkcert
+# https://kifarunix.com/how-to-create-self-signed-ssl-certificate-with-mkcert-on-ubuntu-18-04/
 RUN mkdir ~/mkcert &&\
 	cd ~/mkcert &&\
 	wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64 &&\
