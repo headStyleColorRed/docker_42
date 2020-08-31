@@ -12,3 +12,5 @@ https://www.linode.com/docs/web-servers/nginx/how-to-configure-nginx/
 
 After redirecting to port 443 where we declare the ssl certificates -which we create on the Dockerfile-, establish the root, index, server name y locations.
 
+# PHPMYADMIN
+
